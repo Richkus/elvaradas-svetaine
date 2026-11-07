@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="e"><path d="M7.5 5h17v4.8h-11.3v3.7h10v4.6h-10v3.7h11.3V27h-17z"/></clipPath>
+    <pattern id="h" width="4.6" height="4.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.3" height="4.6" fill="#FFFFFF"/></pattern>
+  </defs>
+  <rect width="32" height="32" rx="7.5" fill="#2E3A86"/>
+  <rect width="32" height="32" fill="url(#h)" clip-path="url(#e)"/>
+</svg>
