@@ -73,55 +73,29 @@ a{color:inherit}
 .top.solid .pill.cta{box-shadow:0 8px 24px -12px rgba(19,25,67,.45)}
 
 
-/* Vientisa viršutinė juosta su išskleidžiamu skydu (T1 kryptis); siauresniuose ekranuose lieka „Meniu“ dropdownas.
-   Skydo stulpeliai naudoja tą patį tinklelį (--c1, --c2) kaip juostos punktai, todėl stovi tiksliai po jais. */
-.nav-bar{--c1:150px;--c2:260px;display:none;position:relative;align-items:center;gap:2px;padding:5px;border-radius:18px;background:rgba(12,14,28,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:background-color .35s ease, color .35s ease, box-shadow .35s ease}
+/* Vientisa viršutinė juosta plačiuose ekranuose (T1 kryptis); siauresniuose lieka „Meniu“ dropdownas */
+.nav-bar{display:none;position:relative;align-items:center;gap:2px;padding:5px;border-radius:16px;background:rgba(12,14,28,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:background-color .35s ease, color .35s ease, box-shadow .35s ease}
 @media (min-width:1180px){ .nav-bar{display:flex} .top-actions{display:none} }
-.nav-items{position:relative;z-index:1;display:grid;grid-template-columns:var(--c1) var(--c2) auto}
-.nav-items a{font-size:14.5px;color:inherit;text-decoration:none;padding:9px 16px;border-radius:11px;white-space:nowrap;opacity:.72;transition:opacity .2s}
-.nav-items a:hover,.nav-items a[aria-current="true"],.nav-items a.hot{opacity:1}
-.nav-items a:focus-visible,.nav-cta:focus-visible,.mega-col a:focus-visible,.mega-btn:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.nav-bar > a,.nav-more-btn{position:relative;z-index:1;font:inherit;font-size:14.5px;color:inherit;text-decoration:none;padding:9px 16px;border-radius:11px;border:0;background:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;opacity:.78;transition:opacity .2s}
+.nav-bar > a:hover,.nav-more-btn:hover,.nav-bar > a[aria-current="true"],.nav-more-btn[aria-current="true"],.nav-more.open .nav-more-btn{opacity:1}
+.nav-bar > a:focus-visible,.nav-more-btn:focus-visible,.nav-cta:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 .nav-ind{position:absolute;top:5px;left:0;height:calc(100% - 10px);width:0;border-radius:11px;background:rgba(255,255,255,.14);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.8,.2,1), width .45s cubic-bezier(.2,.8,.2,1), opacity .25s ease, background-color .35s ease}
 .nav-sep{width:1px;height:20px;background:currentColor;opacity:.2;margin:0 6px}
 .nav-tel{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;font-size:14.5px;white-space:nowrap;opacity:.78}
 .nav-tel svg{width:14px;height:14px}
 .nav-cta{font:inherit;font-size:14px;font-weight:500;border:0;cursor:pointer;margin-left:4px;padding:9px 18px;border-radius:11px;background:var(--hero-ink);color:var(--hero-bg);transition:transform .2s ease, background-color .35s ease, color .35s ease}
 .nav-cta:hover{transform:translateY(-1px)}
-.nav-mega{position:absolute;top:calc(100% + 8px);left:0;right:0;padding:16px 5px 5px;border-radius:18px;background:rgba(12,14,28,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 24px 60px -20px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .22s ease, transform .32s cubic-bezier(.2,.8,.2,1), visibility 0s linear .32s, background-color .35s ease, color .35s ease}
-.nav-mega::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}
-.nav-bar.mega-open .nav-mega{opacity:1;visibility:visible;transform:none;transition:opacity .22s ease, transform .32s cubic-bezier(.2,.8,.2,1), background-color .35s ease, color .35s ease}
-.mega-cols{display:grid;grid-template-columns:var(--c1) var(--c2) minmax(0,1fr);align-items:start;padding-bottom:20px}
-.mega-col{display:grid;gap:1px;align-content:start;transition:opacity .2s ease}
-.nav-mega[data-hot] .mega-col{opacity:.5}
-.nav-mega[data-hot="apie"] .mega-col[data-col="apie"],.nav-mega[data-hot="paslaugos"] .mega-col[data-col="paslaugos"],.nav-mega[data-hot="kontaktai"] .mega-col[data-col="kontaktai"]{opacity:1}
-.mega-col a,.mega-col > span{padding:8px 16px;font-size:15px;line-height:1.35;color:inherit;text-decoration:none;border-radius:10px;opacity:.78;transition:opacity .2s, background-color .2s}
-.mega-col a:hover,.mega-col a[aria-current="true"]{opacity:1;background:rgba(255,255,255,.08)}
-.mega-text > span{opacity:.62;font-size:14px}
-.mega-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.mega-btn{display:flex;justify-content:space-between;align-items:center;gap:12px;font:inherit;font-family:var(--f-mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:16px 18px;border-radius:13px;border:0;cursor:pointer;text-decoration:none;color:inherit;background:rgba(255,255,255,.08);transition:background-color .2s ease}
-.mega-btn:hover{background:rgba(255,255,255,.15)}
-.mega-btn svg{width:12px;height:12px;transition:transform .2s ease}
-.mega-btn:hover svg{transform:translateX(3px)}
-.mega-btn-light{background:var(--hero-ink);color:var(--hero-bg)}
-.mega-btn-light:hover{background:#FFFFFF}
 /* Nuslinkus juosta lieka tamsi, pusiau permatoma, o turinys už jos susilieja (T1) */
 .top.solid .nav-bar{background:rgba(28,30,40,.6);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 10px 30px -16px rgba(0,0,0,.35)}
-.top.solid .nav-mega{background:rgba(28,30,40,.78);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%)}
-/* Logotipas įslysta į juostos pradžią; skydo stulpeliai pasislenka kartu */
-.nav-logo{display:flex;align-items:center;overflow:hidden;max-width:0;opacity:0;visibility:hidden;padding:0;color:#FFFFFF;text-decoration:none;flex:none;transition:max-width .45s cubic-bezier(.2,.8,.2,1), padding .45s cubic-bezier(.2,.8,.2,1), opacity .3s ease, visibility 0s linear .45s}
-.nav-logo svg{height:20px;width:auto;flex:none;display:block}
-.mega-cols{transition:padding-left .45s cubic-bezier(.2,.8,.2,1)}
-@media (min-width:1180px){
-  .top.solid .nav-logo{max-width:160px;opacity:1;visibility:visible;padding:0 18px 0 14px;transition:max-width .45s cubic-bezier(.2,.8,.2,1), padding .45s cubic-bezier(.2,.8,.2,1), opacity .3s ease .1s}
-  .top.solid .mega-cols{padding-left:162px}
-  .top.solid > .wrap > .logo{opacity:0;pointer-events:none}
-  .top::before{display:none}
-}
-@media (prefers-reduced-motion: no-preference){
-  .nav-bar.mega-open .mega-col{animation:ddin .38s cubic-bezier(.2,.8,.2,1) both}
-  .nav-bar.mega-open .mega-col:nth-child(2){animation-delay:.04s}
-  .nav-bar.mega-open .mega-col:nth-child(3){animation-delay:.08s}
-}
+.nav-more{position:relative;z-index:2}
+.nav-more-btn .chev{width:10px;height:10px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.nav-more.open .chev{transform:rotate(180deg)}
+.nav-more-panel{position:absolute;top:calc(100% + 13px);left:50%;width:240px;background:var(--surface);color:var(--ink);border-radius:16px;padding:6px;display:grid;gap:2px;box-shadow:0 0 0 1px var(--line), 0 24px 60px -18px rgba(0,0,0,.38);opacity:0;visibility:hidden;transform:translate(-50%,-6px) scale(.97);transform-origin:top center;transition:opacity .2s ease, transform .3s cubic-bezier(.2,.8,.2,1), visibility 0s linear .3s}
+.nav-more.open .nav-more-panel{opacity:1;visibility:visible;transform:translate(-50%,0);transition:opacity .2s ease, transform .3s cubic-bezier(.2,.8,.2,1)}
+.nav-more-panel a{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink);text-decoration:none;padding:10px 12px;border-radius:10px;font-size:14.5px;transition:background .2s}
+.nav-more-panel a:hover,.nav-more-panel a[aria-current="true"]{background:var(--surface-2)}
+.nav-more-panel a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.nav-more-panel .hint{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
 
 /* Meniu: kompaktiškas išskleidžiamas sąrašas po mygtuku */
 .dd{position:relative}
@@ -585,36 +559,21 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
     </a>
     <nav class="nav-bar" id="navBar" aria-label="Pagrindinis meniu">
       <span class="nav-ind" aria-hidden="true"></span>
-      <a class="nav-logo" href="#pradzia" aria-label="UAB Elvaradas, į pradžią"><svg viewBox="0 0 236 37" aria-hidden="true"><defs><pattern id="hatchBar" width="4.2" height="4.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2.6" height="4.2" fill="currentColor"/></pattern></defs><text x="0" y="36" font-family="Anton, Impact, 'Arial Narrow', sans-serif" font-size="47" textLength="236" lengthAdjust="spacingAndGlyphs" fill="url(#hatchBar)">ELVARADAS</text></svg></a>
-      <div class="nav-items" id="navItems">
-        <a href="#apie" data-top="apie"><span>Apie mus</span></a>
-        <a href="#paslaugos" data-top="paslaugos"><span>Paslaugos</span></a>
-        <a href="#kontaktai" data-top="kontaktai"><span>Kontaktai</span></a>
+      <a href="#apie" data-nav="apie">Apie mus</a>
+      <a href="#paslaugos" data-nav="paslaugos">Paslaugos</a>
+      <a href="#kontaktai" data-nav="kontaktai">Kontaktai</a>
+      <div class="nav-more" id="navMore">
+        <button type="button" class="nav-more-btn" aria-expanded="false" aria-controls="navMorePanel"><span id="navMoreLabel">Daugiau</span><svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+        <div class="nav-more-panel" id="navMorePanel">
+          <a href="#imone" data-nav="imone">Komanda<span class="hint">10 kV</span></a>
+          <a href="#atestatai" data-nav="atestatai">Atestatai<span class="hint">2</span></a>
+          <a href="#partneriai" data-nav="partneriai">Partneriai<span class="hint">7</span></a>
+          <a href="#karjera" data-nav="karjera">Karjera<span class="hint">ieškome</span></a>
+        </div>
       </div>
       <span class="nav-sep" aria-hidden="true"></span>
       <span class="nav-tel"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 2h3l1.5 3.5-2 1.2a8 8 0 0 0 3.8 3.8l1.2-2L14 10v3a1 1 0 0 1-1 1A11 11 0 0 1 2 3a1 1 0 0 1 1-1Z"/></svg><span data-c="contact.phone">0 449 74469</span></span>
       <button class="nav-cta" type="button" data-inquiry="">Užklausa</button>
-      <div class="nav-mega" id="navMega">
-        <div class="mega-cols">
-          <div class="mega-col" data-col="apie">
-            <a href="#apie" data-nav="apie">Apie mus</a>
-            <a href="#imone" data-nav="imone">Komanda</a>
-            <a href="#atestatai" data-nav="atestatai">Atestatai</a>
-            <a href="#partneriai" data-nav="partneriai">Partneriai</a>
-            <a href="#karjera" data-nav="karjera">Karjera</a>
-          </div>
-          <div class="mega-col" data-col="paslaugos" id="megaSvc"></div>
-          <div class="mega-col mega-text" data-col="kontaktai">
-            <span data-c="contact.phone">0 449 74469</span>
-            <span data-c="contact.email">info@elvaradas.lt</span>
-            <span data-c="contact.address">J. Basanavičiaus g. 23-2, LT-75124 Šilalė</span>
-          </div>
-        </div>
-        <div class="mega-actions">
-          <button class="mega-btn mega-btn-light" type="button" data-inquiry="">Užklausa<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5"/></svg></button>
-          <a class="mega-btn" href="#karjera">Karjera<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5"/></svg></a>
-        </div>
-      </div>
     </nav>
     <div class="top-actions">
       <a class="pill phone-pill" href="#kontaktai">
@@ -1093,45 +1052,26 @@ document.addEventListener('click',e=>{
   glide(t).then(()=>{ spyLock=null; spy(); t.classList.remove('arrive'); void t.offsetWidth; t.classList.add('arrive'); setTimeout(()=>t.classList.remove('arrive'),1700); });
 });
 
-/* Vientisa viršutinė juosta: išskleidžiamas skydas ir slenkanti aktyvaus punkto žyma */
-const navBar=document.getElementById('navBar'), navInd=navBar.querySelector('.nav-ind'), navItems=document.getElementById('navItems'),
-      navMega=document.getElementById('navMega'), megaSvc=document.getElementById('megaSvc');
-const TOP_OF={apie:'apie',imone:'apie',atestatai:'apie',partneriai:'apie',karjera:'apie',paslaugos:'paslaugos',kontaktai:'kontaktai'};
-function renderNavSvc(items){ megaSvc.innerHTML=items.map((x,i)=>`<a href="#paslaugos" data-svc="${i}">${esc(x.t)}</a>`).join(''); }
-renderNavSvc(SERVICES);
-let megaT=null;
-function setMega(on,hot){
-  clearTimeout(megaT);
-  navBar.classList.toggle('mega-open',on);
-  if(on&&hot) navMega.dataset.hot=hot; else if(!on) delete navMega.dataset.hot;
-  navItems.querySelectorAll('[data-top]').forEach(a=>a.classList.toggle('hot', on && a.dataset.top===navMega.dataset.hot));
-}
-navItems.addEventListener('mouseover',e=>{ const a=e.target.closest('[data-top]'); if(a) setMega(true,a.dataset.top); });
-navMega.addEventListener('mouseover',e=>{ clearTimeout(megaT); const c=e.target.closest('[data-col]'); if(c) setMega(true,c.dataset.col); });
-navBar.addEventListener('mouseenter',()=>clearTimeout(megaT));
-navBar.addEventListener('mouseleave',()=>{ megaT=setTimeout(()=>setMega(false),200); });
-navItems.addEventListener('focusin',e=>{ const a=e.target.closest('[data-top]'); if(a) setMega(true,a.dataset.top); });
-navBar.addEventListener('focusout',e=>{ if(!navBar.contains(e.relatedTarget)) setMega(false); });
-addEventListener('keydown',e=>{ if(e.key==='Escape' && navBar.classList.contains('mega-open')) setMega(false); });
-document.addEventListener('click',e=>{ if(navBar.classList.contains('mega-open') && !navBar.contains(e.target)) setMega(false); });
-navMega.addEventListener('click',e=>{ const sv=e.target.closest('[data-svc]'); if(sv) openSvc(+sv.dataset.svc,false); if(e.target.closest('a,button')) setMega(false); });
-/* Liečiamuose ekranuose pirmas palietimas atidaro skydą, antras – pereina į skyrių */
-const noHover=matchMedia('(hover: none)');
-navItems.addEventListener('click',e=>{ const a=e.target.closest('[data-top]'); if(!a) return;
-  if(noHover.matches && !navBar.classList.contains('mega-open')){ e.preventDefault(); e.stopImmediatePropagation(); setMega(true,a.dataset.top); }
-  else setMega(false);
-},true);
+/* Vientisa viršutinė juosta: „Daugiau“ sąrašas ir slenkanti aktyvaus skyriaus žyma */
+const navBar=document.getElementById('navBar'), navInd=navBar.querySelector('.nav-ind'), navMore=document.getElementById('navMore'),
+      navMoreBtn=navMore.querySelector('.nav-more-btn'), navMoreLabel=document.getElementById('navMoreLabel');
+function setNavMore(on){ navMore.classList.toggle('open',on); navMoreBtn.setAttribute('aria-expanded',String(on)); }
+navMoreBtn.addEventListener('click',e=>{ e.stopPropagation(); setNavMore(!navMore.classList.contains('open')); });
+document.addEventListener('click',e=>{ if(navMore.classList.contains('open') && (!navMore.contains(e.target) || e.target.closest('.nav-more-panel a'))) setNavMore(false); });
+addEventListener('keydown',e=>{ if(e.key==='Escape' && navMore.classList.contains('open')){ setNavMore(false); navMoreBtn.focus(); } });
 let navCur=null;
 function updateNav(id){
-  navCur=id; const top=id ? TOP_OF[id] : null;
-  navItems.querySelectorAll('[data-top]').forEach(a=>a.setAttribute('aria-current', String(a.dataset.top===top)));
-  navMega.querySelectorAll('[data-nav]').forEach(a=>a.setAttribute('aria-current', String(a.dataset.nav===id)));
-  const label=top ? navItems.querySelector(`[data-top="${top}"] span`) : null;
-  if(!label || !navBar.offsetWidth){ navInd.style.opacity='0'; return; }
-  const br=navBar.getBoundingClientRect(), r=label.getBoundingClientRect(), pad=16;
+  navCur=id;
+  navBar.querySelectorAll('a[data-nav]').forEach(a=>a.setAttribute('aria-current', String(a.dataset.nav===id)));
+  const sub=id ? navMore.querySelector(`[data-nav="${id}"]`) : null;
+  navMoreLabel.textContent = sub ? sub.firstChild.textContent.trim() : 'Daugiau';
+  navMoreBtn.setAttribute('aria-current', String(!!sub));
+  const target = !id ? null : sub ? navMoreBtn : navBar.querySelector(`:scope > a[data-nav="${id}"]`);
+  if(!target || !navBar.offsetWidth){ navInd.style.opacity='0'; return; }
+  const x=target.getBoundingClientRect().left-navBar.getBoundingClientRect().left;
   const first=navInd.style.opacity!=='1';
   if(first) navInd.style.transition='none';
-  navInd.style.width=(r.width+pad*2)+'px'; navInd.style.transform=`translateX(${r.left-br.left-pad}px)`; navInd.style.opacity='1';
+  navInd.style.width=target.offsetWidth+'px'; navInd.style.transform=`translateX(${x}px)`; navInd.style.opacity='1';
   if(first){ void navInd.offsetWidth; navInd.style.transition=''; }
 }
 addEventListener('resize',()=>updateNav(navCur));
@@ -1152,7 +1092,7 @@ function spy(){
   const max=document.documentElement.scrollHeight-innerHeight;
   ddProg.style.setProperty('--p', max>0 ? (scrollY/max).toFixed(3) : 0);
   const solidNow=heroPanel.getBoundingClientRect().bottom < 64;
-  if(solidNow!==topBar.classList.contains('solid')){ topBar.classList.toggle('solid', solidNow); setTimeout(()=>updateNav(navCur), reduceMotion?0:470); }
+  if(solidNow!==topBar.classList.contains('solid')) topBar.classList.toggle('solid', solidNow);
   if(idx===curSpy) return; curSpy=idx;
   updateNav(idx<0 ? null : spyLinks[idx].dataset.spy);
   spyLinks.forEach((a,i)=>a.setAttribute('aria-current', i===idx ? 'true' : 'false'));
@@ -1340,7 +1280,6 @@ function applyContent(c){
   document.querySelectorAll('[data-tel-c]').forEach(a=>{ a.href=telHref(getPath(c,a.dataset.telC)); });
   document.querySelectorAll('[data-copy-c]').forEach(b=>{ const v=getPath(c,b.dataset.copyC); if(v) b.dataset.copy=v; });
   renderServices(c.services.items);
-  renderNavSvc(c.services.items);
   statList.innerHTML = c.stats.items.map(x=>`<div class="stat"><span class="v">${esc(x.v)}${x.u?`<sup>${esc(x.u)}</sup>`:''}</span><span class="k">${esc(x.k)}</span></div>`).join('');
   const names=c.partners.items.filter(n=>n.trim());
   partnerList.innerHTML = names.map(n=>`<div>${esc(n)}</div>`).join('');
