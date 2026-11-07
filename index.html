@@ -106,7 +106,7 @@ a{color:inherit}
 .dd-label.swap{animation:swap .4s cubic-bezier(.2,.7,.2,1)}
 @keyframes swap{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
 /* Mobilus viso ekrano meniu (iki 1180 px): dideli punktai, išskleidžiamos grupės, du dideli veiksmai, kontaktai apačioje */
-.mnav{position:fixed;inset:0;z-index:35;background:#0E0F16;color:#FFFFFF;overflow-y:auto;overscroll-behavior:contain;padding-top:calc(env(safe-area-inset-top, 0px) + 14px);padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 28px);opacity:0;transition:opacity .3s ease}
+.mnav{position:fixed;inset:0;z-index:35;background:var(--hero-bg);color:#FFFFFF;overflow-y:auto;overscroll-behavior:contain;padding-top:calc(env(safe-area-inset-top, 0px) + 14px);padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 28px);opacity:0;transition:opacity .3s ease}
 .mnav.open{opacity:1}
 .mnav-top{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:46px}
 .mnav-top .logo{filter:none;color:#FFFFFF}
