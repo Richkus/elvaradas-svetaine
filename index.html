@@ -148,6 +148,14 @@ a{color:inherit}
   .mnav.open .mnav-info{animation-delay:.16s}
 }
 
+/* Nuslinkus logotipas įslysta į juostos pradžią (T1). Apkarpoma tik horizontaliai, kad raidžių viršus ir apačia neapsikirptų */
+.nav-bar > a.nav-logo{display:flex;align-items:center;max-width:0;padding:0;opacity:0;visibility:hidden;overflow-x:clip;overflow-y:visible;flex:none;color:#FFFFFF;transition:max-width .45s cubic-bezier(.2,.8,.2,1), padding .45s cubic-bezier(.2,.8,.2,1), opacity .25s ease, visibility 0s linear .45s}
+.nav-logo svg{display:block;height:18px;width:auto;flex:none;overflow:visible}
+@media (min-width:1180px){
+  .top.solid .nav-bar > a.nav-logo{max-width:150px;padding:0 16px 0 12px;opacity:1;visibility:visible;transition:max-width .45s cubic-bezier(.2,.8,.2,1), padding .45s cubic-bezier(.2,.8,.2,1), opacity .3s ease .12s}
+  .top.solid > .wrap > .logo{opacity:0;pointer-events:none}
+  .top::before{display:none}
+}
 /* Dropdownai: tamsus stiklas, puslapis už jų susilieja (T1) */
 .nav-more-panel{background:rgba(28,30,40,.64);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);color:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1), 0 24px 60px -18px rgba(0,0,0,.45)}
 .nav-more-panel a{color:#FFFFFF}
@@ -616,6 +624,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
     </a>
     <nav class="nav-bar" id="navBar" aria-label="Pagrindinis meniu">
       <span class="nav-ind" aria-hidden="true"></span>
+      <a class="nav-logo" href="#pradzia" aria-label="UAB Elvaradas, į pradžią"><svg viewBox="0 0 236 37" aria-hidden="true"><defs><pattern id="hatchBar" width="4.2" height="4.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2.6" height="4.2" fill="currentColor"/></pattern></defs><text x="0" y="36" font-family="Anton, Impact, 'Arial Narrow', sans-serif" font-size="47" textLength="236" lengthAdjust="spacingAndGlyphs" fill="url(#hatchBar)">ELVARADAS</text></svg></a>
       <a href="#apie" data-nav="apie">Apie mus</a>
       <a href="#paslaugos" data-nav="paslaugos">Paslaugos</a>
       <a href="#kontaktai" data-nav="kontaktai">Kontaktai</a>
@@ -1180,7 +1189,7 @@ function spy(){
   if(innerHeight+scrollY >= document.documentElement.scrollHeight-4) idx=spySecs.length-1;
   if(spyLock!==null) idx=SPY.findIndex(([id])=>id===spyLock);
   const solidNow=heroPanel.getBoundingClientRect().bottom < 64;
-  if(solidNow!==topBar.classList.contains('solid')) topBar.classList.toggle('solid', solidNow);
+  if(solidNow!==topBar.classList.contains('solid')){ topBar.classList.toggle('solid', solidNow); setTimeout(()=>updateNav(navCur), reduceMotion?0:470); }
   if(idx===curSpy) return; curSpy=idx;
   const id=idx<0 ? null : SPY[idx][0];
   updateNav(id);
