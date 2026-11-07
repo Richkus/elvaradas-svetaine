@@ -89,7 +89,10 @@ a{color:inherit}
 .dd-list .hint{margin-left:auto;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
 .dd-progress{height:2px;margin:8px 12px 4px;background:var(--surface-2);border-radius:2px;overflow:hidden}
 .dd-progress i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:left;transform:scaleX(var(--p,0));transition:transform .2s linear}
-.dd-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px 6px;font-size:13.5px;color:var(--muted)}
+.dd-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px;padding:10px 12px;border-radius:11px;font-size:13.5px;color:var(--muted);text-decoration:none;transition:background .2s, color .2s}
+.dd-foot:hover{background:var(--surface-2);color:var(--ink)}
+.dd-call{display:inline-flex;align-items:center;gap:8px}
+.dd-call svg{width:14px;height:14px}
 .dd-foot strong{color:var(--ink);font-weight:500}
 @media (prefers-reduced-motion: no-preference){
   .dd.open .dd-list li{animation:ddin .38s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 28ms + 40ms)}
@@ -533,7 +536,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
     <div class="top-actions">
       <a class="pill phone-pill" href="#kontaktai">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h3l1.5 3.5-2 1.2a8 8 0 0 0 3.8 3.8l1.2-2L14 10v3a1 1 0 0 1-1 1A11 11 0 0 1 2 3a1 1 0 0 1 1-1Z"/></svg>
-        <span data-c="contact.phone">8 449 74469</span>
+        <span data-c="contact.phone">0 449 74469</span>
       </a>
       <button class="pill cta" type="button" data-inquiry="">Užklausa</button>
       <div class="dd" id="dd">
@@ -553,7 +556,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
           <li style="--i:6"><a href="#kontaktai" data-spy="kontaktai"><span class="dot"></span>Kontaktai<span class="hint">Šilalė</span></a></li>
         </ul>
         <div class="dd-progress" aria-hidden="true"><i id="ddProg"></i></div>
-        <div class="dd-foot"><span>Telefonas</span><strong data-c="contact.phone">8 449 74469</strong></div>
+        <a class="dd-foot" href="tel:+37044974469" data-tel-c="contact.phone"><span class="dd-call"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 2h3l1.5 3.5-2 1.2a8 8 0 0 0 3.8 3.8l1.2-2L14 10v3a1 1 0 0 1-1 1A11 11 0 0 1 2 3a1 1 0 0 1 1-1Z"/></svg>Paskambinti</span><strong data-c="contact.phone">0 449 74469</strong></a>
       </nav>
       </div>
     </div>
@@ -710,7 +713,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
         <div>
           <span class="eyebrow">Karjera</span>
           <h2 data-c="career.title">Ieškome elektrikų, kurie nebijo iššūkių</h2>
-          <p style="margin-top:20px" data-c="career.text">Nuolat ieškome sąžiningų, darbščių ir norinčių tobulėti darbuotojų. Paskambinkite 8 687 25756 arba atsiųskite gyvenimo aprašymą adresu info@elvaradas.lt.</p>
+          <p style="margin-top:20px" data-c="career.text">Nuolat ieškome sąžiningų, darbščių ir norinčių tobulėti darbuotojų. Paskambinkite 0 687 25756 arba atsiųskite gyvenimo aprašymą adresu info@elvaradas.lt.</p>
           <div class="actions">
             <a class="btn btn-line" href="#kontaktai" data-inquiry="Darbas įmonėje">Parašyti mums</a>
           </div>
@@ -734,7 +737,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
           </div>
         </div>
         <dl class="req">
-            <div><dt>Telefonas</dt><dd class="big"><span data-c="contact.phone">8 449 74469</span> <button class="copy" type="button" data-copy-c="contact.phone" data-copy="8 449 74469">Kopijuoti</button></dd></div>
+            <div><dt>Telefonas</dt><dd class="big"><span data-c="contact.phone">0 449 74469</span> <button class="copy" type="button" data-copy-c="contact.phone" data-copy="0 449 74469">Kopijuoti</button></dd></div>
             <div><dt>El. paštas</dt><dd class="big"><span data-c="contact.email">info@elvaradas.lt</span> <button class="copy" type="button" data-copy-c="contact.email" data-copy="info@elvaradas.lt">Kopijuoti</button></dd></div>
             <div><dt>Adresas</dt><dd data-c="contact.address">J. Basanavičiaus g. 23-2, LT-75124 Šilalė</dd></div>
             <div><dt>Įmonės kodas</dt><dd data-c="contact.code">176633746</dd></div>
@@ -860,7 +863,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
         <svg class="foot-logo" viewBox="0 0 236 37" role="img" aria-label="UAB Elvaradas"><defs><pattern id="hatchFoot" width="4.2" height="4.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2.6" height="4.2" fill="currentColor"/></pattern></defs><text x="0" y="36" font-family="Anton, Impact, 'Arial Narrow', sans-serif" font-size="47" textLength="236" lengthAdjust="spacingAndGlyphs" fill="url(#hatchFoot)">ELVARADAS</text></svg>Elektros instaliacija, projektavimas ir matavimai iki 10 kV nuo 1998 m.</div>
       <div><strong>PASLAUGOS</strong><ul><li><a href="#paslaugos">Instaliacijos darbai</a></li><li><a href="#paslaugos">Projektavimas</a></li><li><a href="#paslaugos">Matavimai</a></li><li><a href="#paslaugos">Kiti darbai</a></li></ul></div>
       <div><strong>ĮMONĖ</strong><ul><li><a href="#apie">Apie mus</a></li><li><a href="#atestatai">Atestatai</a></li><li><a href="#partneriai">Partneriai</a></li><li><a href="#karjera">Karjera</a></li></ul></div>
-      <div><strong>KONTAKTAI</strong><span data-c="contact.phone">8 449 74469</span><br><span data-c="contact.email">info@elvaradas.lt</span><br><span data-c="contact.address">J. Basanavičiaus g. 23-2, LT-75124 Šilalė</span></div>
+      <div><strong>KONTAKTAI</strong><span data-c="contact.phone">0 449 74469</span><br><span data-c="contact.email">info@elvaradas.lt</span><br><span data-c="contact.address">J. Basanavičiaus g. 23-2, LT-75124 Šilalė</span></div>
     </div>
     <div class="foot-bottom">
       <p class="proto">© UAB „Elvaradas“ 2026 · Dizaino eskizas · Nuotraukos pavyzdinės (Unsplash)</p>
@@ -878,7 +881,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
   <div class="bo-card" role="dialog" aria-labelledby="boTitle">
     <span class="bolt" aria-hidden="true"></span>
     <p class="bo-title" id="boTitle">Dingo šviesa? Tam mes ir esame.</p>
-    <p class="bo-sub">Kol ieškote saugiklio, pasišvieskite žibintuvėliu ir apžiūrėkite puslapį. O kai reikia elektriko, skambinkite <span data-c="contact.phone">8 449 74469</span>.</p>
+    <p class="bo-sub">Kol ieškote saugiklio, pasišvieskite žibintuvėliu ir apžiūrėkite puslapį. O kai reikia elektriko, skambinkite <span data-c="contact.phone">0 449 74469</span>.</p>
     <button class="btn btn-accent" type="button" id="lightsOn">Įjungti šviesą</button>
   </div>
 </div>
@@ -887,6 +890,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
 /* Turinio pagalbinės funkcijos */
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clone=o=>o===undefined?undefined:JSON.parse(JSON.stringify(o));
+const telHref=v=>{ let d=String(v||'').replace(/[^\d+]/g,''); if(/^[08]/.test(d)) d='+370'+d.slice(1); return 'tel:'+d; };
 const getPath=(o,p)=>p.split('.').reduce((a,k)=>a==null?undefined:a[k],o);
 function setPath(o,p,v){ const ks=p.split('.'); let a=o; for(let i=0;i<ks.length-1;i++){ if(a[ks[i]]==null) a[ks[i]]=/^\d+$/.test(ks[i+1])?[]:{}; a=a[ks[i]]; } a[ks[ks.length-1]]=v; }
 function merge(base,over){
@@ -1214,6 +1218,7 @@ let CONTENT = clone(DEFAULT);
 const statList=document.getElementById('statList'), partnerList=document.getElementById('partnerList'), svcSelect=document.getElementById('f-svc');
 function applyContent(c){
   document.querySelectorAll('[data-c]').forEach(el=>{ const v=getPath(c,el.dataset.c); if(typeof v==='string' && el.textContent!==v) el.textContent=v; });
+  document.querySelectorAll('[data-tel-c]').forEach(a=>{ a.href=telHref(getPath(c,a.dataset.telC)); });
   document.querySelectorAll('[data-copy-c]').forEach(b=>{ const v=getPath(c,b.dataset.copyC); if(v) b.dataset.copy=v; });
   renderServices(c.services.items);
   statList.innerHTML = c.stats.items.map(x=>`<div class="stat"><span class="v">${esc(x.v)}${x.u?`<sup>${esc(x.u)}</sup>`:''}</span><span class="k">${esc(x.k)}</span></div>`).join('');
