@@ -145,7 +145,6 @@ a{color:inherit}
 .photo img{display:block;width:100%;height:100%;object-fit:cover}
 .photo figcaption{position:absolute;left:12px;bottom:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:6px 10px;border-radius:var(--r-pill);background:var(--glass);color:var(--glass-ink);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .svc-photo{aspect-ratio:4/5;max-width:340px}
-.stats-photo{aspect-ratio:4/5;max-width:380px;margin-top:16px}
 .career-photo{aspect-ratio:4/3}
 .hero-inner{position:relative;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px;align-items:end;padding:120px var(--inset) clamp(24px,4vw,48px)}
 .hero h1{font-size:clamp(40px,6.4vw,92px);line-height:.98;margin-top:20px}
@@ -231,7 +230,7 @@ section.block{padding-block:clamp(72px,10vw,140px) 0}
 .certs-head h2{font-size:clamp(28px,3.2vw,46px);max-width:20ch}
 .certs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .cert{background:var(--surface);border-radius:var(--r-lg);padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:clamp(16px,3vw,32px);align-items:start}
-.cert .doc{all:unset;box-sizing:border-box;cursor:zoom-in;display:block;aspect-ratio:680/951;border-radius:8px;overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,.04), 0 14px 28px -14px rgba(20,22,29,.4);transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s}
+.cert .doc{all:unset;box-sizing:border-box;cursor:pointer;display:block;aspect-ratio:680/951;border-radius:8px;overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,.04), 0 14px 28px -14px rgba(20,22,29,.4);transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s}
 .cert .doc img{display:block;width:100%;height:100%;object-fit:cover}
 .cert:hover .doc{transform:rotate(-2deg) translateY(-4px);box-shadow:0 1px 0 rgba(0,0,0,.04), 0 22px 36px -16px rgba(20,22,29,.45)}
 .cert .doc:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
@@ -272,12 +271,16 @@ section.block{padding-block:clamp(72px,10vw,140px) 0}
 .contact > .req{margin:0;align-self:end}
 .contact-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
 
+/* Atidarius langą: po juo esantys stiklo efektai išjungiami, langas – atskiras sluoksnis, slinkimas lieka jo viduje (sklandesnis) */
+html.modal-open .top *,html.modal-open .note-card,html.modal-open .media-label{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.panel{contain:layout paint;will-change:transform}
+.panel-body,.cm-body{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 /* Užklausos langas (Jeton kryptis): išslysta iš dešinės, minkšti užpildyti laukai, platus siuntimo mygtukas apačioje */
 .drawer{position:fixed;inset:0;z-index:40;visibility:hidden;transition:visibility 0s linear .5s}
 .drawer.open{visibility:visible;transition:none}
 .scrim{position:absolute;inset:0;background:var(--scrim);opacity:0;transition:opacity .45s ease}
 .drawer.open .scrim{opacity:1}
-.panel{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 10px);bottom:calc(env(safe-area-inset-bottom, 0px) + 10px);right:max(10px, env(safe-area-inset-right, 0px));width:min(480px, calc(100% - 20px));background:var(--surface);color:var(--ink);border-radius:22px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px -24px rgba(0,0,0,.45);transform:translateX(calc(100% + 32px));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.panel{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 10px);bottom:calc(env(safe-area-inset-bottom, 0px) + 10px);right:max(10px, env(safe-area-inset-right, 0px));width:min(480px, calc(100% - 20px));background:var(--surface);color:var(--ink);border-radius:22px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.4);transform:translateX(calc(100% + 32px));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .drawer.open .panel{transform:none}
 .panel-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 22px 6px}
 .panel-head h2{font-size:26px;font-weight:400;letter-spacing:-.015em}
@@ -327,19 +330,14 @@ textarea.f{min-height:132px;resize:vertical}
 
 /* Atestato peržiūra: erdvus modalas, kairėje dokumentas, dešinėje teisės ir duomenys */
 .cm{position:fixed;inset:0;z-index:45;display:grid;place-items:center;padding:max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
-.cm-scrim{position:absolute;inset:0;background:var(--scrim);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .4s ease}
+.cm-scrim{position:absolute;inset:0;background:var(--scrim);opacity:0;transition:opacity .4s ease}
 .cm.open .cm-scrim{opacity:1}
 .cm-panel{position:relative;width:min(1240px,100%);height:min(860px,100%);background:var(--surface);color:var(--ink);border-radius:28px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);box-shadow:0 40px 100px -30px rgba(0,0,0,.5);opacity:0;transform:translateY(18px) scale(.985);transition:opacity .35s ease, transform .55s cubic-bezier(.2,.8,.2,1)}
 .cm.open .cm-panel{opacity:1;transform:none}
 .cm-close{position:absolute;top:20px;right:20px;z-index:3}
 .cm-viewer{position:relative;background:var(--surface-2);display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0}
-.cm-stage{position:relative;overflow:hidden;cursor:zoom-in;min-height:0}
+.cm-stage{position:relative;overflow:hidden;min-height:0}
 .cm-stage img{position:absolute;inset:0;margin:auto;max-width:calc(100% - 96px);max-height:calc(100% - 80px);border-radius:4px;box-shadow:0 1px 0 rgba(0,0,0,.05), 0 36px 70px -28px rgba(20,22,29,.5);transform-origin:var(--ox,50%) var(--oy,50%);transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .25s ease}
-.cm-stage.zoomed{cursor:zoom-out}
-.cm-stage.zoomed img{transform:scale(1.75);transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .25s ease, transform-origin .12s linear}
-.cm-hint{position:absolute;left:20px;top:20px;display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--surface);padding:7px 12px;border-radius:var(--r-pill);pointer-events:none;transition:opacity .25s}
-.cm-hint svg{width:12px;height:12px}
-.cm-stage.zoomed .cm-hint{opacity:0}
 .cm-pages{display:flex;gap:10px;justify-content:center;padding:0 20px 22px}
 .cm-pages:empty{display:none}
 .cm-thumb{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:12px;background:var(--surface);font-size:14px;box-shadow:0 0 0 1px var(--line);transition:box-shadow .2s, background .2s}
@@ -691,7 +689,6 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
           <span class="eyebrow">Įmonė</span>
           <h2 data-c="stats.intro">Bendrovėje dirba patyrę, kvalifikuoti specialistai. Jų kvalifikacija nuolat keliama kursuose ir seminaruose.</h2>
           <div><a class="btn btn-line" href="#karjera">Prisijunk prie komandos</a></div>
-          <figure class="photo stats-photo"><img src="img/matavimai.jpg" alt="Elektrikas multimetru tikrina skydo grandines" loading="lazy"><figcaption>Matavimai pagal EN 61557</figcaption></figure>
         </div>
         <div class="stat-list" id="statList">
           <div class="stat"><span class="v">1998</span><span class="k">Įmonės įkūrimo metai</span></div>
@@ -800,7 +797,6 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
     <div class="cm-viewer">
       <div class="cm-stage" id="cmStage">
         <img id="cmImg" alt="">
-        <span class="cm-hint"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="4.5"/><path d="M9.5 9.5 13 13M6 4v4M4 6h4"/></svg>Spustelėkite, kad priartintumėte</span>
       </div>
       <div class="cm-pages" id="cmPages"></div>
     </div>
@@ -877,7 +873,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
           </div>
           <div><label class="sr" for="f-phone">Telefono numeris</label><input class="f" id="f-phone" name="telefonas" type="tel" autocomplete="tel-national" inputmode="tel" placeholder="Telefono numeris"></div>
         </div>
-        <div><label class="sr" for="f-msg">Žinutė</label><textarea class="f" id="f-msg" name="klausimas" placeholder="Objektas, vieta, darbų apimtis, terminai"></textarea></div>
+        <div><label class="sr" for="f-msg">Žinutė</label><textarea class="f" id="f-msg" name="klausimas" placeholder="Kuo galime padėti?"></textarea></div>
         <p class="p-label" id="howLbl">Kaip atsakyti</p>
         <div class="pchips" role="radiogroup" aria-labelledby="howLbl">
           <input type="radio" name="atsakymas" id="r-call" value="skambutis" checked><label for="r-call">Paskambinkite</label>
@@ -909,7 +905,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
       <div><strong>KONTAKTAI</strong><span data-c="contact.phone">0 449 74469</span><br><span data-c="contact.email">info@elvaradas.lt</span><br><span data-c="contact.address">J. Basanavičiaus g. 23-2, LT-75124 Šilalė</span></div>
     </div>
     <div class="foot-bottom">
-      <p class="proto">© UAB „Elvaradas“ 2026 · Dizaino eskizas · Nuotraukos pavyzdinės (Unsplash)</p>
+      <p class="proto">© UAB „Elvaradas“ 2026 · Nuotraukos pavyzdinės (Unsplash)</p>
       <div class="foot-tools">
       <a class="admin-link" id="adminLink" href="#admin" data-route hidden>Turinio valdymas</a>
       <button class="switch" id="switch" type="button" aria-pressed="false" title="Šviesos jungiklis">
@@ -1168,7 +1164,6 @@ function renderCert(animate){
 }
 function showPage(i, animate){
   pi=i; const c=CERTS[ci], p=c.pages[i];
-  cmStage.classList.remove('zoomed');
   cmPages.querySelectorAll('.cm-thumb').forEach((b,j)=>b.setAttribute('aria-pressed', String(j===i)));
   const set=()=>{ cmImg.src=p.src; cmImg.alt=`${c.title}, ${p.label.toLowerCase()}`; };
   if(!animate || reduceMotion){ set(); return; }
@@ -1181,30 +1176,23 @@ function showPage(i, animate){
 }
 function openCert(i){
   cmLast=document.activeElement; ci=i; renderCert(false);
-  cm.hidden=false; void cm.offsetWidth; cm.classList.add('open');
+  cm.hidden=false; void cm.offsetWidth; cm.classList.add('open'); document.documentElement.classList.add('modal-open');
   document.documentElement.style.overflow='hidden';
   setTimeout(()=>cm.querySelector('.cm-close').focus({preventScroll:true}), 60);
 }
 function closeCert(){
-  cm.classList.remove('open'); document.documentElement.style.overflow='';
-  setTimeout(()=>{ cm.hidden=true; cmStage.classList.remove('zoomed'); }, reduceMotion ? 0 : 420);
+  cm.classList.remove('open'); document.documentElement.style.overflow=''; document.documentElement.classList.remove('modal-open');
+  setTimeout(()=>{ cm.hidden=true; }, reduceMotion ? 0 : 420);
   if(cmLast) cmLast.focus({preventScroll:true});
 }
 document.addEventListener('click',e=>{
   const o=e.target.closest('[data-cert]'); if(o){ e.preventDefault(); openCert(+o.dataset.cert); return; }
   if(e.target.closest('[data-cclose]')) closeCert();
 });
-document.getElementById('cmAsk').addEventListener('click',()=>{ cm.classList.remove('open'); cm.hidden=true; document.documentElement.style.overflow=''; });
+document.getElementById('cmAsk').addEventListener('click',()=>{ cm.classList.remove('open'); cm.hidden=true; document.documentElement.style.overflow=''; document.documentElement.classList.remove('modal-open'); });
 cmPages.addEventListener('click',e=>{ const b=e.target.closest('[data-page]'); if(b && +b.dataset.page!==pi) showPage(+b.dataset.page, true); });
 cmPrev.addEventListener('click',()=>{ if(ci>0){ ci--; renderCert(true); } });
 cmNext.addEventListener('click',()=>{ if(ci<CERTS.length-1){ ci++; renderCert(true); } });
-function setOrigin(e){
-  const r=cmStage.getBoundingClientRect();
-  const x=(e.clientX-r.left-cmImg.offsetLeft)/cmImg.offsetWidth*100, y=(e.clientY-r.top-cmImg.offsetTop)/cmImg.offsetHeight*100;
-  cmImg.style.setProperty('--ox', Math.max(0,Math.min(100,x))+'%'); cmImg.style.setProperty('--oy', Math.max(0,Math.min(100,y))+'%');
-}
-cmStage.addEventListener('click',e=>{ setOrigin(e); cmStage.classList.toggle('zoomed'); });
-cmStage.addEventListener('mousemove',e=>{ if(cmStage.classList.contains('zoomed')) setOrigin(e); });
 addEventListener('keydown',e=>{
   if(cm.hidden) return;
   if(e.key==='Escape') closeCert();
@@ -1230,6 +1218,7 @@ function setDrawer(on, svc){
   }
   drawer.classList.toggle('open',on); drawer.setAttribute('aria-hidden',String(!on));
   document.documentElement.style.overflow = on ? 'hidden' : '';
+  document.documentElement.classList.toggle('modal-open', on);
   if(on) setTimeout(()=>(form.hidden ? document.getElementById('again') : form.vardas).focus({preventScroll:true}), 80);
   else if(lastFocus) lastFocus.focus({preventScroll:true});
 }
@@ -1258,7 +1247,7 @@ form.addEventListener('submit',e=>{
   if(!name){ err.textContent='Įrašykite vardą, kad žinotume, kaip į jus kreiptis.'; form.vardas.focus(); return; }
   if(how==='skambutis' && phone.replace(/\D/g,'').length<6){ err.textContent='Pasirinkote skambutį, todėl įrašykite telefono numerį.'; form.telefonas.focus(); return; }
   if(how==='laiskas' && !/^\S+@\S+\.\S+$/.test(mail)){ err.textContent='Pasirinkote laišką, todėl įrašykite el. pašto adresą, pvz. vardas@imone.lt.'; form.elpastas.focus(); return; }
-  if(!msg){ err.textContent='Trumpai aprašykite darbus: objektą, vietą, apimtį.'; form.klausimas.focus(); return; }
+  if(!msg){ err.textContent='Parašykite trumpą žinutę.'; form.klausimas.focus(); return; }
   err.textContent='';
   document.getElementById('doneText').textContent = (how==='skambutis' ? `Paskambintume numeriu ${form.kodas.value} ${phone}.` : `Atsakytume adresu ${mail}.`) + ' Tai eskizas, todėl niekas neišsiųsta.';
   form.hidden=true; done.hidden=false; document.getElementById('again').focus();
