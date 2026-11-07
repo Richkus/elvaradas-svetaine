@@ -74,7 +74,7 @@ a{color:inherit}
 
 
 /* Vientisa viršutinė juosta plačiuose ekranuose (T1 kryptis); siauresniuose lieka „Meniu“ dropdownas */
-.nav-bar{display:none;position:relative;align-items:center;gap:2px;padding:5px;border-radius:16px;background:rgba(12,14,28,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:background-color .35s ease, color .35s ease, box-shadow .35s ease}
+.nav-bar{display:none;position:relative;z-index:1;align-items:center;gap:2px;padding:5px;border-radius:16px;color:#FFFFFF;transition:background-color .35s ease, color .35s ease, box-shadow .35s ease}
 @media (min-width:1180px){ .nav-bar{display:flex} .top-actions{display:none} }
 .nav-bar > a,.nav-more-btn{position:relative;z-index:1;font:inherit;font-size:14.5px;color:inherit;text-decoration:none;padding:9px 16px;border-radius:11px;border:0;background:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;opacity:.78;transition:opacity .2s}
 .nav-bar > a:hover,.nav-more-btn:hover,.nav-bar > a[aria-current="true"],.nav-more-btn[aria-current="true"],.nav-more.open .nav-more-btn{opacity:1}
@@ -86,7 +86,9 @@ a{color:inherit}
 .nav-cta{font:inherit;font-size:14px;font-weight:500;border:0;cursor:pointer;margin-left:4px;padding:9px 18px;border-radius:11px;background:var(--hero-ink);color:var(--hero-bg);transition:transform .2s ease, background-color .35s ease, color .35s ease}
 .nav-cta:hover{transform:translateY(-1px)}
 /* Nuslinkus juosta lieka tamsi, pusiau permatoma, o turinys už jos susilieja (T1) */
-.top.solid .nav-bar{background:rgba(28,30,40,.6);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 10px 30px -16px rgba(0,0,0,.35)}
+/* Juostos stiklas piešiamas ::before sluoksnyje, ne pačioje juostoje: kitaip juostos viduje esantis sąrašas negalėtų sulieti puslapio už savęs */
+.nav-bar::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:rgba(12,14,28,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:background-color .35s ease, box-shadow .35s ease}
+.top.solid .nav-bar::before{background:rgba(28,30,40,.6);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 10px 30px -16px rgba(0,0,0,.35)}
 .nav-more{position:relative;z-index:2}
 .nav-more-btn .chev{width:10px;height:10px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
 .nav-more.open .chev{transform:rotate(180deg)}
@@ -119,6 +121,20 @@ a{color:inherit}
 .dd-foot:hover{background:var(--surface-2);color:var(--ink)}
 .dd-call{display:inline-flex;align-items:center;gap:8px}
 .dd-call svg{width:14px;height:14px}
+/* Dropdownai: tamsus stiklas, puslapis už jų susilieja (T1) */
+.nav-more-panel,.dd-panel{background:rgba(28,30,40,.64);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);color:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1), 0 24px 60px -18px rgba(0,0,0,.45)}
+.nav-more-panel a,.dd-list a{color:#FFFFFF}
+.nav-more-panel a{opacity:.85}
+.nav-more-panel a:hover,.nav-more-panel a[aria-current="true"],.dd-list a:hover,.dd-list a[aria-current="true"]{background:rgba(255,255,255,.1);opacity:1}
+.nav-more-panel a:focus-visible,.dd-list a:focus-visible{outline:2px solid #FFFFFF;outline-offset:-2px}
+.nav-more-panel .hint,.dd-list .hint{color:rgba(255,255,255,.55)}
+.dd-list .dot{background:rgba(255,255,255,.28)}
+.dd-list a[aria-current="true"] .dot{background:#FFFFFF}
+.dd-progress{background:rgba(255,255,255,.14)}
+.dd-progress i{background:#FFFFFF}
+.dd-foot{color:rgba(255,255,255,.62)}
+.dd-foot:hover{background:rgba(255,255,255,.1);color:#FFFFFF}
+.dd-foot strong{color:#FFFFFF}
 .dd-foot strong{color:var(--ink);font-weight:500}
 @media (prefers-reduced-motion: no-preference){
   .dd.open .dd-list li{animation:ddin .38s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 28ms + 40ms)}
@@ -271,7 +287,7 @@ section.block{padding-block:clamp(72px,10vw,140px) 0}
 .contact-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
 
 /* Atidarius langą: po juo esantys stiklo efektai išjungiami, langas – atskiras sluoksnis, slinkimas lieka jo viduje (sklandesnis) */
-html.modal-open .top *,html.modal-open .note-card,html.modal-open .media-label{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html.modal-open .top *,html.modal-open .top *::before,html.modal-open .note-card,html.modal-open .media-label{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 .panel{contain:layout paint;will-change:transform}
 .panel-body,.cm-body{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 /* Užklausos langas (Jeton kryptis): išslysta iš dešinės, minkšti užpildyti laukai, platus siuntimo mygtukas apačioje */
