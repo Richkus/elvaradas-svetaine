@@ -1489,6 +1489,20 @@ function closeAdmin(){ try{ history.replaceState(null,'',location.pathname+locat
 admin.addEventListener('click',e=>{ if(e.target.closest('[data-adm-close]')) closeAdmin(); });
 addEventListener('keydown',e=>{ if(e.key==='Escape' && !admin.hidden && !admToast.classList.contains('show') && document.activeElement?.tagName!=='TEXTAREA') closeAdmin(); });
 addEventListener('hashchange',route); route();
+
+/* Favicon: „E“ kas kelias sekundes trumpam virsta žaibu ir grįžta */
+(function(){
+  const svg=(inner)=>'data:image/svg+xml,'+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><pattern id='h' width='4.6' height='4.6' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'><rect width='3.3' height='4.6' fill='#FFFFFF'/></pattern></defs><rect width='32' height='32' rx='7.5' fill='#2E3A86'/>${inner}</svg>`);
+  const hatched=d=>`<clipPath id='c'><path d='${d}'/></clipPath><rect width='32' height='32' fill='url(#h)' clip-path='url(#c)'/>`;
+  const E_PATH='M7.5 5h17v4.8h-11.3v3.7h10v4.6h-10v3.7h11.3V27h-17z', BOLT_PATH='M19.5 3 7 18.2h7.6L12 29l13.5-15.8h-7.8z';
+  const F_E=svg(hatched(E_PATH)), F_BOLT_H=svg(hatched(BOLT_PATH)), F_BOLT=svg(`<path d='${BOLT_PATH}' fill='#FFFFFF'/>`);
+  const set=h=>document.querySelectorAll('link[rel="icon"]').forEach(l=>{ if(l.href!==h) l.href=h; });
+  set(F_E);
+  if(reduceMotion) return;
+  const seq=[[F_BOLT_H,140],[F_BOLT,520],[F_BOLT_H,140],[F_E,0]];
+  function flash(){ if(document.hidden) return; let t=0; seq.forEach(([f,d])=>{ setTimeout(()=>set(f),t); t+=d; }); }
+  setTimeout(flash,1800); setInterval(flash,9000);
+})();
 let admRT; addEventListener('resize',()=>{ if(admin.hidden) return; clearTimeout(admRT); admRT=setTimeout(()=>admDoc.querySelectorAll('.adm-in').forEach(autosize),120); });
 
 </script>
