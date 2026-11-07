@@ -80,6 +80,7 @@ a{color:inherit}
 .nav-bar > a:focus-visible,.nav-more-btn:focus-visible,.nav-cta:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 .nav-ind{position:absolute;top:5px;left:0;height:calc(100% - 10px);width:0;border-radius:11px;background:rgba(255,255,255,.14);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.8,.2,1), width .45s cubic-bezier(.2,.8,.2,1), opacity .25s ease, background-color .35s ease}
 .nav-sep{width:1px;height:20px;background:currentColor;opacity:.2;margin:0 6px}
+.nav-tel{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;font-size:14.5px;white-space:nowrap;opacity:.78}
 .nav-tel svg{width:14px;height:14px}
 .nav-cta{font:inherit;font-size:14px;font-weight:500;border:0;cursor:pointer;margin-left:4px;padding:9px 18px;border-radius:11px;background:var(--hero-ink);color:var(--hero-bg);transition:transform .2s ease, background-color .35s ease, color .35s ease}
 .nav-cta:hover{transform:translateY(-1px)}
@@ -573,7 +574,7 @@ footer{padding-block:56px calc(32px + env(safe-area-inset-bottom, 0px));color:va
         </div>
       </div>
       <span class="nav-sep" aria-hidden="true"></span>
-      <a class="nav-tel" href="tel:+37044974469" data-tel-c="contact.phone"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 2h3l1.5 3.5-2 1.2a8 8 0 0 0 3.8 3.8l1.2-2L14 10v3a1 1 0 0 1-1 1A11 11 0 0 1 2 3a1 1 0 0 1 1-1Z"/></svg><span data-c="contact.phone">0 449 74469</span></a>
+      <span class="nav-tel"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 2h3l1.5 3.5-2 1.2a8 8 0 0 0 3.8 3.8l1.2-2L14 10v3a1 1 0 0 1-1 1A11 11 0 0 1 2 3a1 1 0 0 1 1-1Z"/></svg><span data-c="contact.phone">0 449 74469</span></span>
       <button class="nav-cta" type="button" data-inquiry="">Užklausa</button>
     </nav>
     <div class="top-actions">
@@ -1053,7 +1054,8 @@ document.addEventListener('click',e=>{
   const t=document.getElementById(a.getAttribute('href').slice(1)); if(!t) return;
   e.preventDefault();
   if(menu.classList.contains('open')) setMenu(false);
-  glide(t).then(()=>{ t.classList.remove('arrive'); void t.offsetWidth; t.classList.add('arrive'); setTimeout(()=>t.classList.remove('arrive'),1700); });
+  spyLock=t.id; spy();
+  glide(t).then(()=>{ spyLock=null; spy(); t.classList.remove('arrive'); void t.offsetWidth; t.classList.add('arrive'); setTimeout(()=>t.classList.remove('arrive'),1700); });
 });
 
 /* Vientisa viršutinė juosta: „Daugiau“ sąrašas ir slenkanti aktyvaus skyriaus žyma */
@@ -1085,13 +1087,14 @@ if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>updateNav
 const spyLinks=[...menu.querySelectorAll('[data-spy]')];
 const spySecs=spyLinks.map(a=>document.getElementById(a.dataset.spy));
 const ddLabel=document.getElementById('ddLabel'), ddProg=document.getElementById('ddProg');
-let curSpy=null, spyQueued=false;
+let curSpy=null, spyQueued=false, spyLock=null; /* slenkant į pasirinktą skyrių žyma laikoma ant jo, nešokinėja per tarpines sekcijas */
 const topBar=document.querySelector('.top'), heroPanel=document.querySelector('.hero-panel');
 function spy(){
   spyQueued=false;
   const line=innerHeight*0.38; let idx=-1;
   spySecs.forEach((s,i)=>{ if(s.getBoundingClientRect().top + (parseFloat(getComputedStyle(s).paddingTop)||0) <= line) idx=i; });
   if(innerHeight+scrollY >= document.documentElement.scrollHeight-4) idx=spySecs.length-1;
+  if(spyLock!==null) idx=spyLinks.findIndex(a=>a.dataset.spy===spyLock);
   const max=document.documentElement.scrollHeight-innerHeight;
   ddProg.style.setProperty('--p', max>0 ? (scrollY/max).toFixed(3) : 0);
   topBar.classList.toggle('solid', heroPanel.getBoundingClientRect().bottom < 64);
